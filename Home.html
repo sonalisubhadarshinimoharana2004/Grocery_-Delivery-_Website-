@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blinkit - Online Grocery</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#f7f7f7] text-gray-800">
+
+<!-- NAVBAR SECTION -->
+
+    <header class="bg-white border-b sticky top-0 z-50">
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-6">
+
+            <div class="h-20 flex items-center gap-6">
+
+<!-- LOGO -->
+
+                <div class="min-w-fit">
+                    <h1 class="text-3xl font-extrabold tracking-tight">
+                        <span class="text-yellow-500">blink</span><span class="text-green-600">it</span>
+                    </h1>
+
+                    <p class="text-[10px] text-gray-500 font-medium">
+                        Groceries in 10 minutes
+                    </p>
+                </div>
+
+
+<!-- LOCATION -->
+
+                <div class="hidden md:block min-w-[180px]">
+
+                    <p class="text-xs text-gray-500">
+                        Delivery to
+                    </p>
+
+                    <div class="flex items-center gap-1">
+
+                        <p class="font-bold text-sm">
+                            Bhubaneswar
+                        </p>
+
+                        <span class="text-xs">▼</span>
+
+                    </div>
+
+                </div>
+
+
+<!-- SEARCH -->
+
+                <div class="flex-1 relative">
+
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg">
+                        <img src="./Assets/search.png" alt="Search" class="w-6 h-6 object-contain mx-auto"/>
+                    </span>
+
+                    <input
+                        type="text"
+                        placeholder="Search for products, brands and more"
+                        class="w-full bg-gray-100 rounded-xl py-3.5 pl-12 pr-5 outline-none border border-transparent focus:border-green-500"
+                    >
+
+                </div>
+
+
+<!-- LOGIN -->
+
+                <button class="hidden sm:block text-gray-700 font-medium px-3">
+                   <a href="./login.html" style="text-decoration: none;">Login</a> 
+                </button>
+
+
+<!-- CART -->
+
+                <button class="bg-green-600 text-white rounded-xl px-5 py-3 font-semibold flex items-center gap-2 hover:bg-green-700">
+
+                    <span >
+                        <img src="./Assets/shopping-cart.png" alt="" class="h-5 w-5">
+                    </span>
+
+                    <span>Cart</span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+<!-- MAIN SECTION -->
+
+    <main class="max-w-7xl mx-auto px-4 lg:px-6 py-6">
+
+
+<!-- HERO SECTION -->
+
+        <section
+            class="bg-gradient-to-r from-yellow-300 to-yellow-100 rounded-3xl overflow-hidden"
+        >
+
+            <div class="grid md:grid-cols-2 items-center">
+
+<!-- LEFT CONTENT -->
+
+                <div class="p-8 md:p-12">
+
+                    <span class="inline-block bg-green-600 text-white text-xs font-bold px-3 py-1.5 rounded-full mb-4">
+                        ⚡ FAST DELIVERY
+                    </span>
+
+                    <h2 class="text-4xl md:text-5xl font-extrabold leading-tight text-gray-900">
+
+                        Groceries delivered
+                        <span class="text-green-600">
+                            in minutes
+                        </span>
+
+                    </h2>
+
+                    <p class="mt-4 text-gray-600 max-w-md">
+                        Fresh fruits, vegetables, groceries and daily
+                        essentials delivered directly to your doorstep.
+                    </p>
+
+                    <button class="mt-7 bg-green-600 hover:bg-green-700 text-white px-7 py-3.5 rounded-xl font-bold">
+                        Shop Now →
+                    </button>
+
+                </div>
+
+
+<!-- RIGHT DESIGN -->
+
+                <div class="hidden md:flex justify-center items-center p-20">
+
+                    <div class="text-[150px]">
+                        🛒
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+<!-- CATAGORY SECTION -->
+
+        <section class="mt-10">
+
+            <div class="flex items-center justify-between mb-5">
+
+                <h2 class="text-2xl font-bold">
+                    Shop by Category
+                </h2>
+
+                <button class="text-green-600 font-semibold">
+                    View All →
+                </button>
+
+            </div>
+
+
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+
+
+<!-- CATEGORY 1 -->
+
+                <div class="bg-white rounded-2xl p-4 text-center hover:shadow-md transition cursor-pointer">
+
+                        <img src="./Assets/fruits.jpg" alt="Fruits" class="h=10 w=10 ">
+
+                    <p class="mt-3 text-sm font-semibold">
+                        Fruits
+                    </p>
+
+                </div>
+
+
+<!-- CATEGORY 2 -->
+
+                <div class="bg-white rounded-2xl p-4 text-center hover:shadow-md transition cursor-pointer">
+
+                <img src="./Assets/vegitable.png" alt="">
+
+                    <p class="mt-3 text-sm font-semibold">
+                        Vegetables
+                    </p>
+
+                </div>
+
+
+<!-- CATEGORY 3 -->
+
+                <div class="bg-white rounded-2xl p-4 text-center hover:shadow-md transition cursor-pointer">
+
+                    <img src="./Assets/Dairyproduct.png" alt="">
+
+                    <p class="mt-3 text-sm font-semibold">
+                        Dairy
+                    </p>
+
+                </div>
+
+
+<!-- CATEGORY 4 -->
+
+                <div class="bg-white rounded-2xl p-4 text-center hover:shadow-md transition cursor-pointer">
+
+                  <img src="./Assets/bakery.png" alt="">
+
+                    <p class="mt-3 text-sm font-semibold">
+                        Bakery
+                    </p>
+
+                </div>
+
+
+<!-- CATEGORY 5 -->
+
+                <div class="bg-white rounded-2xl p-4 text-center hover:shadow-md transition cursor-pointer">
+
+                 <img src="./Assets/snaks.png" alt="">
+
+                    <p class="mt-3 text-sm font-semibold">
+                        Snacks
+                    </p>
+
+                </div>
+
+
+<!-- CATEGORY 6 -->
+
+                <div class="bg-white rounded-2xl p-4 text-center hover:shadow-md transition cursor-pointer">
+
+                 <img src="./Assets/atta_rice_dal.webp" alt="">
+
+                    <p class="mt-3 text-sm font-semibold">
+                        Atta, Rice & Dal
+                    </p>
+
+                </div>
+
+
+<!-- CATEGORY 7 -->
+
+                <div class="bg-white rounded-2xl p-4 text-center hover:shadow-md transition cursor-pointer">
+
+                   <img src="./Assets/oilghee.png" alt="">
+
+                    <p class="mt-3 text-sm font-semibold">
+                        Oil, Ghee & Masala
+                    </p>
+
+                </div>
+
+
+<!-- CATEGORY 8 -->
+
+                <div class="bg-white rounded-2xl p-4 text-center hover:shadow-md transition cursor-pointer">
+
+                   <img src="./Assets/coldrinksand juice.webp" alt="">
+
+                    <p class="mt-3 text-sm font-semibold">
+                        Bevrages
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+<!-- OFFER BANNER -->
+
+        <section class="mt-10">
+
+            <h2 class="text-2xl font-bold mb-5">
+                Best Offers
+            </h2>
+
+
+            <div class="grid md:grid-cols-3 gap-5">
+
+
+                <!-- OFFER 1 -->
+
+                <div class="bg-green-100 rounded-2xl p-6 flex justify-between items-center">
+
+                    <div>
+
+                        <p class="text-green-700 font-bold text-sm">
+                            WEEKEND OFFER
+                        </p>
+
+                        <h3 class="text-2xl font-extrabold mt-2">
+                            Up to 40% OFF
+                        </h3>
+
+                        <p class="text-sm text-gray-600 mt-1">
+                            On fresh vegetables
+                        </p>
+
+                        <button class="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                            Shop Now
+                        </button>
+
+                    </div>
+
+                    <div class="text-6xl">
+                        🥦
+                    </div>
+
+                </div>
+
+
+<!-- OFFER 2 -->
+
+                <div class="bg-orange-100 rounded-2xl p-6 flex justify-between items-center">
+
+                    <div>
+
+                        <p class="text-orange-700 font-bold text-sm">
+                            SPECIAL DEAL
+                        </p>
+
+                        <h3 class="text-2xl font-extrabold mt-2">
+                            Buy 1 Get 1
+                        </h3>
+
+                        <p class="text-sm text-gray-600 mt-1">
+                            On selected snacks
+                        </p>
+
+                        <button class="mt-4 bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                            Explore
+                        </button>
+
+                    </div>
+
+                    <div class="text-6xl">
+                        🍪
+                    </div>
+
+                </div>
+
+
+<!-- OFFER 3 -->
+
+                <div class="bg-blue-100 rounded-2xl p-6 flex justify-between items-center">
+
+                    <div>
+
+                        <p class="text-blue-700 font-bold text-sm">
+                            NEW USERS
+                        </p>
+
+                        <h3 class="text-2xl font-extrabold mt-2">
+                            ₹100 OFF
+                        </h3>
+
+                        <p class="text-sm text-gray-600 mt-1">
+                            On your first order
+                        </p>
+
+                        <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                            Get Offer
+                        </button>
+
+                    </div>
+
+                    <div class="text-6xl">
+                        🎁
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+<!-- PRODUCT SECTION -->
+
+        <section class="mt-10">
+
+            <div class="flex items-center justify-between mb-5">
+
+                <h2 class="text-2xl font-bold">
+                    Popular Products
+                </h2>
+
+                <button class="text-green-600 font-semibold">
+                    View All →
+                </button>
+
+            </div>
+
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+
+
+<!-- PRODUCT 1 -->
+
+                <div class="bg-white rounded-2xl p-4 border hover:shadow-lg transition">
+
+                    <div class="bg-gray-100 rounded-xl h-40 flex items-center justify-center text-7xl">
+                        <img src="./Assets/Dairyproduct.png" alt="">
+                    </div>
+
+                    <p class="text-xs text-gray-500 mt-3">
+                        500 ml
+                    </p>
+
+                    <h3 class="font-bold mt-1">
+                        Fresh Milk
+                    </h3>
+
+                    <p class="text-sm text-gray-500">
+                        Dairy
+                    </p>
+
+                    <div class="flex items-center justify-between mt-4">
+
+                        <span class="font-bold">
+                            ₹30
+                        </span>
+
+                        <button class="border-2 border-green-600 text-green-600 px-4 py-1.5 rounded-lg font-bold text-sm hover:bg-green-600 hover:text-white">
+                            ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+<!-- PRODUCT 2 -->
+
+                <div class="bg-white rounded-2xl p-4 border hover:shadow-lg transition">
+
+                    <div class="bg-gray-100 rounded-xl h-40 flex items-center justify-center text-7xl">
+                        <img src="./Assets/apple.png" alt="">
+                    </div>
+
+                    <p class="text-xs text-gray-500 mt-3">
+                        1 kg
+                    </p>
+
+                    <h3 class="font-bold mt-1">
+                        Fresh Apple
+                    </h3>
+
+                    <p class="text-sm text-gray-500">
+                        Fruits
+                    </p>
+
+                    <div class="flex items-center justify-between mt-4">
+
+                        <span class="font-bold">
+                            ₹120
+                        </span>
+
+                        <button class="border-2 border-green-600 text-green-600 px-4 py-1.5 rounded-lg font-bold text-sm hover:bg-green-600 hover:text-white">
+                            ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+<!-- PRODUCT 3 -->
+
+                <div class="bg-white rounded-2xl p-4 border hover:shadow-lg transition">
+
+                    <div class="bg-gray-100 rounded-xl h-40 flex items-center justify-center text-7xl">
+                         <img src="./Assets/banana.png" alt="">
+                    </div>
+
+                    <p class="text-xs text-gray-500 mt-3">
+                        1 dozen
+                    </p>
+
+                    <h3 class="font-bold mt-1">
+                        Banana
+                    </h3>
+
+                    <p class="text-sm text-gray-500">
+                        Fruits
+                    </p>
+
+                    <div class="flex items-center justify-between mt-4">
+
+                        <span class="font-bold">
+                            ₹50
+                        </span>
+
+                        <button class="border-2 border-green-600 text-green-600 px-4 py-1.5 rounded-lg font-bold text-sm hover:bg-green-600 hover:text-white">
+                            ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+<!-- PRODUCT 4 -->
+
+                <div class="bg-white rounded-2xl p-4 border hover:shadow-lg transition">
+
+                    <div class="bg-gray-100 rounded-xl h-40 flex items-center justify-center text-7xl">
+                        <img src="./Assets/bread.webp" alt="">
+                    </div>
+
+                    <p class="text-xs text-gray-500 mt-3">
+                        400 g
+                    </p>
+
+                    <h3 class="font-bold mt-1">
+                        Brown Bread
+                    </h3>
+
+                    <p class="text-sm text-gray-500">
+                        Bakery
+                    </p>
+
+                    <div class="flex items-center justify-between mt-4">
+
+                        <span class="font-bold">
+                            ₹40
+                        </span>
+
+                        <button class="border-2 border-green-600 text-green-600 px-4 py-1.5 rounded-lg font-bold text-sm hover:bg-green-600 hover:text-white">
+                            ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+<!-- PRODUCT 5 -->
+
+                <div class="bg-white rounded-2xl p-4 border hover:shadow-lg transition">
+
+                    <div class="bg-gray-100 rounded-xl h-40 flex items-center justify-center text-7xl">
+                         <img src="./Assets/tamato.png" alt="">
+                    </div>
+
+                    <p class="text-xs text-gray-500 mt-3">
+                        1 kg
+                    </p>
+
+                    <h3 class="font-bold mt-1">
+                        Fresh Tomato
+                    </h3>
+
+                    <p class="text-sm text-gray-500">
+                        Vegetables
+                    </p>
+
+                    <div class="flex items-center justify-between mt-4">
+
+                        <span class="font-bold">
+                            ₹35
+                        </span>
+
+                        <button class="border-2 border-green-600 text-green-600 px-4 py-1.5 rounded-lg font-bold text-sm hover:bg-green-600 hover:text-white">
+                            ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+<!-- PRODUCT 6 -->
+
+                <div class="bg-white rounded-2xl p-4 border hover:shadow-lg transition">
+
+                    <div class="bg-gray-100 rounded-xl h-40 flex items-center justify-center text-7xl">
+                        <img src="./Assets/freshpatato.png" alt="">
+                    </div>
+
+                    <p class="text-xs text-gray-500 mt-3">
+                        1 kg
+                    </p>
+
+                    <h3 class="font-bold mt-1">
+                        Fresh Potato
+                    </h3>
+
+                    <p class="text-sm text-gray-500">
+                        Vegetables
+                    </p>
+
+                    <div class="flex items-center justify-between mt-4">
+
+                        <span class="font-bold">
+                            ₹30
+                        </span>
+
+                        <button class="border-2 border-green-600 text-green-600 px-4 py-1.5 rounded-lg font-bold text-sm hover:bg-green-600 hover:text-white">
+                            ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+<!-- PRODUCT 7 -->
+
+                <div class="bg-white rounded-2xl p-4 border hover:shadow-lg transition">
+
+                    <div class="bg-gray-100 rounded-xl h-40 flex items-center justify-center text-7xl">
+                        <img src="./Assets/creambiscut.webp" alt="">
+                    </div>
+
+                    <p class="text-xs text-gray-500 mt-3">
+                        200 g
+                    </p>
+
+                    <h3 class="font-bold mt-1">
+                        Cream Biscuits
+                    </h3>
+
+                    <p class="text-sm text-gray-500">
+                        Snacks
+                    </p>
+
+                    <div class="flex items-center justify-between mt-4">
+
+                        <span class="font-bold">
+                            ₹30
+                        </span>
+
+                        <button class="border-2 border-green-600 text-green-600 px-4 py-1.5 rounded-lg font-bold text-sm hover:bg-green-600 hover:text-white">
+                            ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+<!-- PRODUCT 8 -->
+
+                <div class="bg-white rounded-2xl p-4 border hover:shadow-lg transition">
+
+                    <div class="bg-gray-100 rounded-xl h-40 flex items-center justify-center text-7xl">
+                        <img src="./Assets/orange.webp" alt="">
+                    </div>
+
+                    <p class="text-xs text-gray-500 mt-3">
+                        1 L
+                    </p>
+
+                    <h3 class="font-bold mt-1">
+                        Orange Juice
+                    </h3>
+
+                    <p class="text-sm text-gray-500">
+                        Beverages
+                    </p>
+
+                    <div class="flex items-center justify-between mt-4">
+
+                        <span class="font-bold">
+                            ₹90
+                        </span>
+
+                        <button class="border-2 border-green-600 text-green-600 px-4 py-1.5 rounded-lg font-bold text-sm hover:bg-green-600 hover:text-white">
+                            ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+<!-- PRODUCT 9 -->
+
+                <div class="bg-white rounded-2xl p-4 border hover:shadow-lg transition">
+
+                    <div class="bg-gray-100 rounded-xl h-40 flex items-center justify-center text-7xl">
+                        <img src="./Assets/egg.webp" alt="">
+                    </div>
+
+                    <p class="text-xs text-gray-500 mt-3">
+                        6 pcs
+                    </p>
+
+                    <h3 class="font-bold mt-1">
+                        Fresh Eggs
+                    </h3>
+
+                    <p class="text-sm text-gray-500">
+                        Dairy
+                    </p>
+
+                    <div class="flex items-center justify-between mt-4">
+
+                        <span class="font-bold">
+                            ₹70
+                        </span>
+
+                        <button class="border-2 border-green-600 text-green-600 px-4 py-1.5 rounded-lg font-bold text-sm hover:bg-green-600 hover:text-white">
+                            ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+<!-- PRODUCT 10 -->
+
+                <div class="bg-white rounded-2xl p-4 border hover:shadow-lg transition">
+
+                    <div class="bg-gray-100 rounded-xl h-40 flex items-center justify-center text-7xl">
+                        <img src="./Assets/sprite.png" alt="">
+                    </div>
+
+                    <p class="text-xs text-gray-500 mt-3">
+                        750 ml
+                    </p>
+
+                    <h3 class="font-bold mt-1">
+                        Cold Drink
+                    </h3>
+
+                    <p class="text-sm text-gray-500">
+                        Beverages
+                    </p>
+
+                    <div class="flex items-center justify-between mt-4">
+
+                        <span class="font-bold">
+                            ₹45
+                        </span>
+
+                        <button class="border-2 border-green-600 text-green-600 px-4 py-1.5 rounded-lg font-bold text-sm hover:bg-green-600 hover:text-white">
+                            ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+     <!-- WHY CHOOSE US -->
+
+        <section class="mt-12 bg-white rounded-3xl p-8">
+
+            <h2 class="text-2xl font-bold text-center">
+                Why Choose blinkit?
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mt-8">
+
+
+                <div class="text-center">
+
+                    <div class="text-4xl">
+                        ⚡
+                    </div>
+
+                    <h3 class="font-bold mt-3">
+                        Super Fast
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        Get your groceries delivered quickly.
+                    </p>
+
+                </div>
+
+
+                <div class="text-center">
+
+                    <div class="text-4xl">
+                        🥬
+                    </div>
+
+                    <h3 class="font-bold mt-3">
+                        Fresh Products
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        Quality products at your doorstep.
+                    </p>
+
+                </div>
+
+
+                <div class="text-center">
+
+                    <div class="text-4xl">
+                        💰
+                    </div>
+
+                    <h3 class="font-bold mt-3">
+                        Best Prices
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        Great products at affordable prices.
+                    </p>
+
+                </div>
+
+
+                <div class="text-center">
+
+                    <div class="text-4xl">
+                        🔒
+                    </div>
+
+                    <h3 class="font-bold mt-3">
+                        Secure Shopping
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        Your information stays protected.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+<!-- FOOTER SECTION -->
+
+    <footer class="bg-gray-900 text-white mt-14">
+
+        <div class="max-w-7xl mx-auto px-6 py-12">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+
+                <div>
+
+                    <h2 class="text-2xl font-extrabold">
+                        <span class="text-yellow-400">blink</span><span class="text-green-400">it</span>
+                    </h2>
+
+                    <p class="text-gray-400 text-sm mt-3">
+                        Your everyday grocery shopping,
+                        delivered quickly to your doorstep.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h3 class="font-bold mb-4">
+                        Company
+                    </h3>
+
+                    <ul class="space-y-2 text-sm text-gray-400">
+
+                        <li>About Us</li>
+                        <li>Careers</li>
+                        <li>Contact Us</li>
+                        <li>Press</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div>
+
+                    <h3 class="font-bold mb-4">
+                        Help
+                    </h3>
+
+                    <ul class="space-y-2 text-sm text-gray-400">
+
+                        <li>FAQ</li>
+                        <li>Terms & Conditions</li>
+                        <li>Privacy Policy</li>
+                        <li>Refund Policy</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div>
+
+                    <h3 class="font-bold mb-4">
+                        Download App
+                    </h3>
+
+                    <p class="text-gray-400 text-sm mb-4">
+                        Get the blinkit app
+                    </p>
+
+                    <button class="bg-white text-black px-5 py-2 rounded-lg text-sm font-semibold">
+                        ▶ Google Play
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-500 text-sm">
+
+                © 2026 blinkit. All rights reserved.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>

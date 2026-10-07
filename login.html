@@ -1,11 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login - blinkit</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
-<body>
-    This is login page
+
+<body class="bg-gray-50 min-h-screen">
+
+<div class="min-h-screen flex items-center
+            justify-center px-4">
+
+    <div class="bg-white w-full max-w-md
+                p-8 rounded-2xl shadow-lg">
+
+        <h1 class="text-3xl font-bold
+                   text-center text-green-600">
+
+            blink<span class="text-yellow-500">it
+             
+            </span>
+
+        </h1>
+
+
+        <h2 class="text-2xl font-bold
+                   text-center mt-5">
+
+            Welcome Back!
+
+        </h2>
+
+
+        <form id="loginForm"
+              class="mt-8">
+
+            <input
+                id="loginEmail"
+                type="email"
+                placeholder="Email"
+                class="w-full border p-3
+                       rounded-lg mb-4"
+                required>
+
+
+            <input
+                id="loginPassword"
+                type="password"
+                placeholder="Password"
+                class="w-full border p-3
+                       rounded-lg mb-5"
+                required>
+
+
+            <button
+                type="submit"
+                class="w-full bg-green-600
+                       hover:bg-green-700
+                       text-white p-3
+                       rounded-lg font-bold">
+
+                Login
+
+            </button>
+
+        </form>
+
+
+        <p id="loginMessage"
+           class="text-center mt-4">
+        </p>
+
+
+        <p class="text-center mt-5 text-gray-600">
+
+            Don't have an account?
+
+            <a href="register.html"
+               class="text-green-600 font-semibold">
+
+                Register
+
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<script src="js/script.js"></script>
+
 </body>
 </html>
