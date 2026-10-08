@@ -203,8 +203,7 @@ function calculateTotal() {
 
         </div>
 
-
-        <button
+        <button onclick="goToCheckout()"
             class="w-full mt-5
                    bg-green-600 text-white
                    py-3 rounded-lg font-bold">
@@ -212,8 +211,15 @@ function calculateTotal() {
             Proceed to Checkout
 
         </button>
+        
+  
 
     `;
+    }
+    // Proceed to Checkout
+function goToCheckout() {
+
+    window.location.href = "./order.html";
 
 }
 
