@@ -4,91 +4,193 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cold Drinks & Juices</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Cold Drinks & Juices - Blinkit</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 
 
-<body class="bg-gray-50">
+<body class="bg-[#f7f7f7] text-gray-800">
 
 
-    <!-- Navbar -->
+<!-- NAVBAR -->
 
-    <nav class="flex items-center justify-between px-8 py-4 bg-white shadow sticky top-0 z-50">
+<header class="bg-white border-b sticky top-0 z-50">
 
-        <a href="index.html"
-           class="text-3xl font-bold text-green-600">
+    <div class="max-w-7xl mx-auto px-4 lg:px-6">
 
-            blinkit
-
-        </a>
+        <div class="h-20 flex items-center gap-6">
 
 
-        <div class="flex items-center gap-5">
+            <!-- LOGO -->
 
-            <input
-                type="text"
-                id="searchInput"
-                placeholder='Search "chocolate"'
-                class="w-96 px-5 py-3 bg-gray-100 rounded-lg outline-none"
-            >
+            <div class="min-w-fit">
 
+                <a href="./index.html">
 
-            <span>
-                Account
-            </span>
+                    <h1 class="text-3xl font-extrabold tracking-tight">
 
+                        <span class="text-yellow-500">
+                            blink
+                        </span>
 
-            <a href="cart.html"
-               class="bg-green-600 text-white px-5 py-3 rounded-lg">
+                        <span class="text-green-600">
+                            it
+                        </span>
 
-                🛒 My Cart
-                <span id="cartCount">0</span>
+                    </h1>
 
-            </a>
+                    <p class="text-[10px] text-gray-500 font-medium">
+                        Groceries in 10 minutes
+                    </p>
 
-        </div>
-
-    </nav>
-
-
-
-    <!-- Page heading -->
-
-    <section class="px-8 py-8">
-
-        <div class="flex items-center justify-between">
-
-            <div>
-
-                <h1 class="text-3xl font-bold">
-                    Cold Drinks & Juices
-                </h1>
-
-                <p class="text-gray-500 mt-2">
-                    Refreshing drinks delivered to your door
-                </p>
+                </a>
 
             </div>
 
+
+            <!-- LOCATION -->
+
+            <div class="hidden md:block min-w-[180px]">
+
+                <p class="text-xs text-gray-500">
+                    Delivery to
+                </p>
+
+                <div class="flex items-center gap-1">
+
+                    <p class="font-bold text-sm">
+                        Bhubaneswar
+                    </p>
+
+                    <span class="text-xs">
+                        ▼
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="flex-1 relative">
+
+                <span
+                    class="absolute left-4 top-1/2
+                           -translate-y-1/2">
+
+                    <img
+                        src="./Assets/search.png"
+                        alt="Search"
+                        class="w-6 h-6 object-contain"
+                    >
+
+                </span>
+
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search for products, brands and more"
+                    class="w-full bg-gray-100 rounded-xl
+                           py-3.5 pl-12 pr-5
+                           outline-none border
+                           border-transparent
+                           focus:border-green-500"
+                >
+
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <a
+                href="./login.html"
+                class="hidden sm:block
+                       text-gray-700
+                       font-medium px-3">
+
+                Login
+
+            </a>
+
+
+            <!-- CART -->
+
+            <a
+                href="./cart.html"
+                class="bg-green-600 text-white
+                       rounded-xl px-5 py-3
+                       font-semibold flex items-center
+                       gap-2 hover:bg-green-700">
+
+                <img
+                    src="./Assets/shopping-cart.png"
+                    alt="Cart"
+                    class="h-5 w-5"
+                >
+
+                <span>
+                    Cart
+                </span>
+
+                <span id="cartCount"
+                      class="bg-white text-green-600
+                             text-xs px-2 py-1 rounded-full">
+
+                    0
+
+                </span>
+
+            </a>
+
+
         </div>
 
+    </div>
 
-        <!-- Products -->
-
-        <div
-            id="productContainer"
-            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-8">
-        </div>
-
-    </section>
+</header>
 
 
-    <script src="js/drinks.js"></script>
+
+<!-- PAGE HEADING -->
+
+<main class="max-w-7xl mx-auto px-4 lg:px-6 py-8">
+
+
+    <div>
+
+        <h1 class="text-3xl font-bold">
+            Cold Drinks & Juices
+        </h1>
+
+        <p class="text-gray-500 mt-2">
+            Refreshing drinks delivered to your door
+        </p>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    <div
+        id="productContainer"
+        class="grid grid-cols-2 md:grid-cols-3
+               lg:grid-cols-5 gap-5 mt-8">
+    </div>
+
+
+</main>
+
+
+
+<script src="./js/drinks.js"></script>
 
 </body>
 

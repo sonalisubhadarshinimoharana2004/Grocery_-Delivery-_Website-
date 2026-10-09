@@ -8,47 +8,185 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>My Cart</title>
+    <title>My Cart - Blinkit</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 
 
-<body class="bg-gray-100">
+<body class="bg-[#f7f7f7] text-gray-800">
 
 
-    <nav class="bg-white shadow px-8 py-4">
+<!-- NAVBAR -->
 
-        <a href="index.html"
-           class="text-3xl font-bold text-green-600">
+<header class="bg-white border-b sticky top-0 z-50">
 
-            blinkit
+    <div class="max-w-7xl mx-auto px-4 lg:px-6">
 
-        </a>
-
-    </nav>
+        <div class="h-20 flex items-center gap-6">
 
 
-    <main class="max-w-5xl mx-auto p-8">
+<!-- LOGO -->
 
-        <h1 class="text-3xl font-bold mb-6">
-            My Cart 🛒
-        </h1>
+            <div class="min-w-fit">
+
+                <a href="./index.html">
+
+                    <h1 class="text-3xl font-extrabold tracking-tight">
+
+                        <span class="text-yellow-500">
+                            blink
+                        </span>
+
+                        <span class="text-green-600">
+                            it
+                        </span>
+
+                    </h1>
+
+                    <p class="text-[10px] text-gray-500 font-medium">
+                        Groceries in 10 minutes
+                    </p>
+
+                </a>
+
+            </div>
 
 
-        <div id="cartContainer"></div>
+<!-- LOCATION -->
+
+            <div class="hidden md:block min-w-[180px]">
+
+                <p class="text-xs text-gray-500">
+                    Delivery to
+                </p>
+
+                <div class="flex items-center gap-1">
+
+                    <p class="font-bold text-sm">
+                        Bhubaneswar
+                    </p>
+
+                    <span class="text-xs">
+                        ▼
+                    </span>
+
+                </div>
+
+            </div>
 
 
-        <div
-            id="totalContainer"
-            class="bg-white p-6 mt-6 rounded-xl">
+<!-- SEARCH -->
+
+            <div class="flex-1 relative">
+
+                <span
+                    class="absolute left-4 top-1/2
+                           -translate-y-1/2
+                           text-gray-400 text-lg">
+
+                    <img
+                        src="./Assets/search.png"
+                        alt="Search"
+                        class="w-6 h-6 object-contain"
+                    >
+
+                </span>
+
+
+                <input
+                    type="text"
+                    placeholder="Search for products, brands and more"
+                    class="w-full bg-gray-100 rounded-xl
+                           py-3.5 pl-12 pr-5
+                           outline-none border
+                           border-transparent
+                           focus:border-green-500"
+                >
+
+            </div>
+
+
+<!-- LOGIN -->
+
+            <a
+                href="./login.html"
+                class="hidden sm:block
+                       text-gray-700
+                       font-medium px-3">
+
+                Login
+
+            </a>
+
+
+<!-- CART -->
+
+            <a
+                href="./cart.html"
+                class="bg-green-600 text-white
+                       rounded-xl px-5 py-3
+                       font-semibold flex items-center
+                       gap-2 hover:bg-green-700">
+
+                <span>
+
+                    <img
+                        src="./Assets/shopping-cart.png"
+                        alt="Cart"
+                        class="h-5 w-5"
+                    >
+
+                </span>
+
+                <span>
+                    Cart
+                </span>
+
+            </a>
+
+
         </div>
 
-    </main>
+    </div>
+
+</header>
 
 
-    <script src="js/cart.js"></script>
+
+<!-- CART MAIN SECTION -->
+
+<main class="max-w-5xl mx-auto p-5 md:p-8">
+
+
+    <h1 class="text-3xl font-bold mb-6">
+
+        My Cart 🛒
+
+    </h1>
+
+
+    <!-- CART PRODUCTS -->
+
+    <div id="cartContainer"></div>
+
+
+    <!-- TOTAL -->
+
+    <div
+        id="totalContainer"
+        class="bg-white p-6 mt-6 rounded-xl">
+
+    </div>
+
+
+</main>
+
+
+
+
+<script src="./js/cart.js"></script>
 
 </body>
 
