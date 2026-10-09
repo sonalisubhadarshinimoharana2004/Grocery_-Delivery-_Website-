@@ -6,7 +6,7 @@ const loginMessage = document.getElementById("loginMessage");
 loginForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const email = loginEmail.value.trim();
+    const email = loginEmail.value.trim().toLowerCase();
     const password = loginPassword.value;
 
     // Get registered users from localStorage
