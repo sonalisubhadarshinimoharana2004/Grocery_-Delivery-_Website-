@@ -5,7 +5,7 @@ const categories = [
         id: 1,
         name: "Fruits",
         image: "./Assets/fruits.jpg",
-        link: "#"
+        link: "./category.html?category=fruits"
     },
 
     // 2
@@ -13,7 +13,7 @@ const categories = [
         id: 2,
         name: "Vegetables",
         image: "./Assets/vegitable.png",
-        link: "#"
+        link: "./category.html?category=vegetables"
     },
 
     // 3
@@ -21,7 +21,7 @@ const categories = [
         id: 3,
         name: "Dairy",
         image: "./Assets/Dairyproduct.png",
-        link: "#"
+        link: "./category.html?category=dairy"
     },
 
     // 4
@@ -29,7 +29,7 @@ const categories = [
         id: 4,
         name: "Bakery",
         image: "./Assets/bakery.png",
-        link: "#"
+        link: "./category.html?category=bakery"
     },
 
     // 5
@@ -37,7 +37,7 @@ const categories = [
         id: 5,
         name: "Snacks",
         image: "./Assets/snaks.png",
-        link: "#"
+        link: "./category.html?category=snacks"
     },
 
     // 6
@@ -45,7 +45,7 @@ const categories = [
         id: 6,
         name: "Atta, Rice & Dal",
         image: "./Assets/atta_rice_dal.webp",
-        link: "#"
+        link: "./category.html?category=atta-rice-dal"
     },
 
     // 7
@@ -53,7 +53,7 @@ const categories = [
         id: 7,
         name: "Oil, Ghee & Masala",
         image: "./Assets/oilghee.png",
-        link: "#"
+        link: "./category.html?category=oil-ghee-masala"
     },
 
     // 8
@@ -61,7 +61,7 @@ const categories = [
         id: 8,
         name: "Beverages",
         image: "./Assets/coldrinksand juice.webp",
-        link: "./drinks.html"
+        link: "./category.html?category=drinks"
     },
 
     // 9
@@ -69,7 +69,7 @@ const categories = [
         id: 9,
         name: "Tea, Coffee & Milk Drinks",
         image: "./Assets/tea_cofee.jpg",
-        link: "#"
+        link: "./category.html?category=tea-coffee-milk-drinks"
     },
 
     // 10
@@ -77,7 +77,7 @@ const categories = [
         id: 10,
         name: "Pet Care",
         image: "./Assets/petcare.avif",
-        link: "#"
+        link: "./category.html?category=pet-care"
     },
 
     // 11
@@ -85,7 +85,7 @@ const categories = [
         id: 11,
         name: "Personal Care",
         image: "./Assets/personalcare.png",
-        link: "#"
+        link: "./category.html?category=personal-care"
     },
 
     // 12
@@ -93,7 +93,7 @@ const categories = [
         id: 12,
         name: "Home & Office",
         image: "./Assets/office.png",
-        link: "#"
+        link: "./category.html?category=home-office"
     },
 
     // 13
@@ -101,7 +101,7 @@ const categories = [
         id: 13,
         name: "Pharma & Wellness",
         image: "./Assets/pharma.png",
-        link: "#"
+        link: "./category.html?category=pharma-wellness"
     },
 
     // 14
@@ -109,7 +109,7 @@ const categories = [
         id: 14,
         name: "Baby Care",
         image: "./Assets/babycare.webp",
-        link: "#"
+        link: "./category.html?category=baby-care"
     },
 
     // 15
@@ -117,7 +117,7 @@ const categories = [
         id: 15,
         name: "Chicken, Meat & Fish",
         image: "./Assets/chicken.png",
-        link: "#"
+        link: "./category.html?category=meat-fish"
     },
 
     // 16
@@ -125,7 +125,7 @@ const categories = [
         id: 16,
         name: "Sauces & Spreads",
         image: "./Assets/sauces.png",
-        link: "#"
+        link: "./category.html?category=sauces-spreads"
     }
 
 ];

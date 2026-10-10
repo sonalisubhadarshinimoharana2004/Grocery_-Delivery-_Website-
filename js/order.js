@@ -1,9 +1,22 @@
+// Require a signed-in customer before checkout
+const activeUser = JSON.parse(localStorage.getItem("loggedInUser") || "null");
+if (!activeUser) {
+    window.location.href = "login.html";
+}
+
 // Get cart from Local Storage
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const orderSummary = document.getElementById("orderSummary");
 const orderTotal = document.getElementById("orderTotal");
 
+
+function showCheckoutMessage(message, success) {
+    const box = document.getElementById("checkoutMessage");
+    if (!box) return;
+    box.textContent = message;
+    box.className = `rounded-xl p-3 mb-5 text-sm ${success ? "bg-green-50 text-green-800" : "bg-amber-50 text-amber-800"}`;
+}
 
 // Display Cart Products + Total
 function displayOrder() {
@@ -87,18 +100,15 @@ function placeOrder() {
 
     // Address validation
     if (address === "") {
-
-        alert("Please enter your delivery address.");
-
+        showCheckoutMessage("Please enter your delivery address.", false);
+        document.getElementById("deliveryAddress").focus();
         return;
     }
 
 
     // Cart validation
     if (cart.length === 0) {
-
-        alert("Your cart is empty.");
-
+        showCheckoutMessage("Your cart is empty. Add products before placing an order.", false);
         return;
     }
 
@@ -116,9 +126,19 @@ function placeOrder() {
     );
 
 
+    // Save the delivery address to this user's profile
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const userIndex = users.findIndex(u => u.email === activeUser.email);
+    if (userIndex !== -1) {
+        users[userIndex].address = address;
+        localStorage.setItem("users", JSON.stringify(users));
+        activeUser.address = address;
+        localStorage.setItem("loggedInUser", JSON.stringify(activeUser));
+    }
+
     // Create Order Object
     const order = {
-
+        userEmail: activeUser.email,
         orderId: "ORD" + Date.now(),
 
         products: cart,
@@ -134,29 +154,26 @@ function placeOrder() {
     };
 
 
-    // Save Order in Local Storage
-    localStorage.setItem(
-        "order",
-        JSON.stringify(order)
-    );
+    // Keep every order and associate it with the logged-in customer
+    const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+    orders.push(order);
+    localStorage.setItem("orders", JSON.stringify(orders));
+    // Keep the latest order under the old key too, for compatibility
+    localStorage.setItem("order", JSON.stringify(order));
 
 
     // Clear Cart
     localStorage.removeItem("cart");
 
 
-    // Success
-    alert(
-        "Order placed successfully! 🎉\n\n" +
-        "Order ID: " + order.orderId +
-        "\nTotal: ₹" + total
-    );
-
-
-    // Go to home page
-    window.location.href = "index.html";
+    // Continue without a blocking popup; show confirmation on the My Orders page.
+    window.location.href = "my-orders.html?placed=1";
 }
 
+
+// Prefill saved delivery address for the signed-in user
+const addressField = document.getElementById("deliveryAddress");
+if (addressField && activeUser && activeUser.address) addressField.value = activeUser.address;
 
 // Display order when page opens
 displayOrder();
