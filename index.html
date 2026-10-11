@@ -10,96 +10,9 @@
 </head>
 
 <body class="bg-[#f7f7f7] text-gray-800">
+    <script src="./js/navbar.js"></script>
 
 <!-- NAVBAR SECTION -->
-
-    <header class="bg-white border-b sticky top-0 z-50">
-
-        <div class="max-w-7xl mx-auto px-4 lg:px-6">
-
-            <div class="h-20 flex items-center gap-6">
-
-<!-- LOGO -->
-
-                <div class="min-w-fit">
-                    <h1 class="text-3xl font-extrabold tracking-tight">
-                        <span class="text-yellow-500">blink</span><span class="text-green-600">it</span>
-                    </h1>
-
-                    <p class="text-[10px] text-gray-500 font-medium">
-                        Groceries in 10 minutes
-                    </p>
-                </div>
-
-
-<!-- LOCATION -->
-
-                <div class="hidden md:block min-w-[180px]">
-
-                    <p class="text-xs text-gray-500">
-                        Delivery to
-                    </p>
-
-                    <div class="flex items-center gap-1">
-
-                        <p class="font-bold text-sm">
-                            Bhubaneswar
-                        </p>
-
-                        <span class="text-xs">▼</span>
-
-                    </div>
-
-                </div>
-
-
-<!-- SEARCH -->
-
-                <div class="flex-1 relative">
-
-                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg">
-                        <img src="./Assets/search.png" alt="Search" class="w-6 h-6 object-contain mx-auto"/>
-                    </span>
-
-                    <input
-                        type="text"
-                        placeholder="Search for products, brands and more"
-                        class="w-full bg-gray-100 rounded-xl py-3.5 pl-12 pr-5 outline-none border border-transparent focus:border-green-500"
-                    >
-
-                </div>
-
-
-<!-- LOGIN -->
-
-                <div class="relative">
-                    <a id="navAccountLink" href="./login.html"
-                       class="text-gray-700 font-semibold px-3 py-2 rounded-lg hover:bg-gray-100 whitespace-nowrap">Login</a>
-                </div>
-
-
-<!-- CART -->
-
-                <button class="bg-green-600 text-white rounded-xl px-5 py-3 font-semibold flex items-center gap-2 hover:bg-green-700">
-                    <a href="./cart.html"></a>    
-
-                    <span >
-
-                        <img src="./Assets/shopping-cart.png" alt="" class="h-5 w-5">
-                    </span>
-
-                    <span>Cart</span>
-
-                </button>
-
-            </div>
-
-        </div>
-
-    </header>
-
-
-
 <!-- MAIN SECTION -->
 
     <main class="max-w-7xl mx-auto px-4 lg:px-6 py-6">
@@ -135,7 +48,7 @@
                         essentials delivered directly to your doorstep.
                     </p>
 
-                    <button class="mt-7 bg-green-600 hover:bg-green-700 text-white px-7 py-3.5 rounded-xl font-bold">
+                    <button onclick="document.getElementById('categoryContainer').scrollIntoView({behavior:'smooth'})" class="mt-7 bg-green-600 hover:bg-green-700 text-white px-7 py-3.5 rounded-xl font-bold">
                         Shop Now →
                     </button>
 
@@ -217,7 +130,7 @@
                             On fresh vegetables
                         </p>
 
-                        <button class="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                        <button onclick="location.href='./category.html?category=vegetables'" class="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
                             Shop Now
                         </button>
 
@@ -248,7 +161,7 @@
                             On selected snacks
                         </p>
 
-                        <button class="mt-4 bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                        <button onclick="location.href='./category.html?category=snacks'" class="mt-4 bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-semibold">
                             Explore
                         </button>
 
@@ -279,7 +192,7 @@
                             On your first order
                         </p>
 
-                        <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                        <button onclick="location.href='./category.html?category=fruits'" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
                             Get Offer
                         </button>
 

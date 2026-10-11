@@ -1,154 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Order -blinkit</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+  </head>
 
-</head>
+  <body class="bg-gray-50">
+    <script src="./js/navbar.js"></script>
+    <main class="max-w-3xl mx-auto p-5">
+      <h1 class="text-3xl font-bold mb-6">Checkout 📦</h1>
 
-<body class="bg-gray-50">
+      <!-- Order Summary -->
 
-<header class="bg-white border-b sticky top-0 z-50 p-4">
-    <div class="max-w-6xl mx-auto flex items-center justify-between gap-4">
-        <a href="index.html" class="text-3xl font-extrabold whitespace-nowrap"><span class="text-yellow-500">blink</span><span class="text-green-600">it</span></a>
-        <div class="flex items-center gap-3">
-            <a id="navAccountLink" href="./login.html" class="text-gray-700 font-semibold px-3 py-2 rounded-lg hover:bg-gray-100 whitespace-nowrap">Login</a>
-            <a href="./cart.html" class="bg-green-600 text-white rounded-xl px-4 py-3 font-semibold hover:bg-green-700 whitespace-nowrap">🛒 Cart</a>
-        </div>
-    </div>
-</header>
-
-
-<main class="max-w-3xl mx-auto p-5">
-
-    <h1 class="text-3xl font-bold mb-6">
-        Checkout 📦
-    </h1>
-
-
-    <!-- Order Summary -->
-
-    <div class="bg-white p-6
-                rounded-xl shadow-sm mb-5">
-
-        <h2 class="text-xl font-bold mb-4">
-            Order Summary
-        </h2>
+      <div class="bg-white p-6 rounded-xl shadow-sm mb-5">
+        <h2 class="text-xl font-bold mb-4">Order Summary</h2>
 
         <div id="orderSummary"></div>
 
-        <div class="border-t mt-4 pt-4
-                    flex justify-between
-                    font-bold">
+        <div class="border-t mt-4 pt-4 flex justify-between font-bold">
+          <span>Total</span>
 
-            <span>Total</span>
-
-            <span>
-                ₹<span id="orderTotal">0</span>
-            </span>
-
+          <span> ₹<span id="orderTotal">0</span> </span>
         </div>
+      </div>
 
-    </div>
+      <p
+        id="checkoutMessage"
+        class="hidden rounded-xl p-3 mb-5 text-sm"
+        role="status"
+      ></p>
 
+      <!-- Address -->
 
-    <p id="checkoutMessage" class="hidden rounded-xl p-3 mb-5 text-sm" role="status"></p>
-
-    <!-- Address -->
-
-    <div class="bg-white p-6
-                rounded-xl shadow-sm mb-5">
-
-        <h2 class="text-xl font-bold mb-4">
-            Delivery Address
-        </h2>
+      <div class="bg-white p-6 rounded-xl shadow-sm mb-5">
+        <h2 class="text-xl font-bold mb-4">Delivery Address</h2>
 
         <textarea
-            id="deliveryAddress"
-            rows="4"
-            placeholder="Enter your full delivery address"
-            class="w-full border rounded-lg
-                   p-3 outline-none
-                   focus:ring-2
-                   focus:ring-green-500">
+          id="deliveryAddress"
+          rows="4"
+          placeholder="Enter your full delivery address"
+          class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-green-500"
+        >
         </textarea>
+      </div>
 
-    </div>
+      <!-- Payment -->
 
+      <div class="bg-white p-6 rounded-xl shadow-sm">
+        <h2 class="text-xl font-bold mb-4">Payment Method</h2>
 
-    <!-- Payment -->
+        <label class="flex gap-3 border p-4 rounded-lg mb-3">
+          <input type="radio" name="payment" value="COD" checked />
 
-    <div class="bg-white p-6
-                rounded-xl shadow-sm">
-
-        <h2 class="text-xl font-bold mb-4">
-            Payment Method
-        </h2>
-
-
-        <label class="flex gap-3
-                      border p-4 rounded-lg mb-3">
-
-            <input type="radio"
-                   name="payment"
-                   value="COD"
-                   checked>
-
-            Cash on Delivery
-
+          Cash on Delivery
         </label>
 
+        <label class="flex gap-3 border p-4 rounded-lg mb-3">
+          <input type="radio" name="payment" value="UPI" />
 
-        <label class="flex gap-3
-                      border p-4 rounded-lg mb-3">
-
-            <input type="radio"
-                   name="payment"
-                   value="UPI">
-
-            UPI
-
+          UPI
         </label>
 
+        <label class="flex gap-3 border p-4 rounded-lg">
+          <input type="radio" name="payment" value="Card" />
 
-        <label class="flex gap-3
-                      border p-4 rounded-lg">
-
-            <input type="radio"
-                   name="payment"
-                   value="Card">
-
-            Credit / Debit Card
-
+          Credit / Debit Card
         </label>
-
 
         <button
-            onclick="placeOrder()"
-            class="w-full bg-green-600
-                   text-white py-3
-                   rounded-xl mt-6
-                   font-bold">
-
-            Place Order
-
+          onclick="placeOrder()"
+          class="w-full bg-green-600 text-white py-3 rounded-xl mt-6 font-bold"
+        >
+          Place Order
         </button>
+      </div>
+    </main>
 
-    </div>
-
-</main>
-
-
-<script src="js/order.js"></script>
-<script src="js/account.js"></script>
-
-</body>
+    <script src="js/order.js"></script>
+    <script src="js/account.js"></script>
+  </body>
 </html>
