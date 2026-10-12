@@ -1,59 +1,69 @@
 (() => {
-
-  const read = (key, fallback) => {
+  // Read Local Storage safely
+  function readStorage(key, fallback = []) {
     try {
       return JSON.parse(localStorage.getItem(key)) ?? fallback;
     } catch {
       return fallback;
     }
-  };
+  }
 
-  const safe = (value) =>
-    String(value ?? "").replace(/[&<>"']/g, (ch) => ({
+  // Escape HTML
+  function safe(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (char) => ({
       "&": "&amp;",
       "<": "&lt;",
       ">": "&gt;",
       '"': "&quot;",
       "'": "&#39;"
-    })[ch]);
+    })[char]);
+  }
 
-  const money = (value) =>
-    Number(value || 0).toLocaleString("en-IN", {
+  // Format price
+  function money(value) {
+    return Number(value || 0).toLocaleString("en-IN", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
+  }
 
- 
-  //  Check logged-in user
-  
-
-  const user = read("loggedInUser", null);
+  // Check logged-in user
+  const user = readStorage("loggedInUser", null);
 
   if (!user) {
-    location.href = "login.html";
+    window.location.href = "login.html";
     return;
   }
 
+  // Main container
   const container = document.getElementById("myOrders");
+
   const searchInput = document.getElementById("orderSearch");
   const orderCount = document.getElementById("orderCount");
 
-  if (!container) return;
+  if (!container) {
+    console.error('Element with id="myOrders" was not found.');
+    return;
+  }
 
-  // Show success message after checkout
-  if (new URLSearchParams(location.search).get("placed") === "1") {
+  // Check page mode
+  const pageParams = new URLSearchParams(window.location.search);
+
+  const isJustPlacedView = pageParams.get("placed") === "1";
+  const requestedOrderId = pageParams.get("orderId");
+
+  // Show order success message after checkout
+  if (isJustPlacedView) {
     document.getElementById("successMessage")
       ?.classList.remove("hidden");
   }
 
-  
-  //  Get current user's orders
-  
-
-  const savedOrders = read("orders", []);
+  // Get saved orders
+  const savedOrders = readStorage("orders", []);
 
   const userEmail = String(user.email || "").toLowerCase();
 
+  // Only show orders belonging to the logged-in user
   const userOrders = savedOrders.filter((order) => {
     return String(order.userEmail || "").toLowerCase() === userEmail;
   });
@@ -93,18 +103,36 @@
     if (order.orderDate) {
       groupedOrder.orderDate = order.orderDate;
     }
+
+    if (order.total != null) {
+      groupedOrder.total = order.total;
+    }
+
+    if (order.status) {
+      groupedOrder.status = order.status;
+    }
   });
 
   // Latest orders first
-  const orders = [...groupedOrders.values()].reverse();
+  const allOrders = [...groupedOrders.values()].reverse();
 
-  // Show only 4 orders initially
+  // Select the exact order just placed
+  const justPlacedOrder = isJustPlacedView
+    ? allOrders.find(
+        (order) =>
+          String(order.orderId) === String(requestedOrderId)
+      ) || null
+    : null;
+
+  // Checkout page: one order
+  // Normal My Orders page: all orders
+  const orders = isJustPlacedView
+    ? (justPlacedOrder ? [justPlacedOrder] : [])
+    : allOrders;
+
   let showAllOrders = false;
 
- 
-  //  Render product list
-  
-
+  // Render all products in an order
   function renderProducts(products) {
     if (!products.length) {
       return `
@@ -114,11 +142,16 @@
       `;
     }
 
-    return products.map((item) => {
-      const name = safe(item.name || "Product");
-      const image = safe(item.image || item.img || "");
-      const quantity = Math.max(1, Number(item.quantity) || 1);
-      const price = Number(item.price) || 0;
+    return products.map((product) => {
+      const name = safe(product.name || "Product");
+      const image = safe(product.image || product.img || "");
+
+      const quantity = Math.max(
+        1,
+        Number(product.quantity) || 1
+      );
+
+      const price = Number(product.price) || 0;
 
       return `
         <div class="flex items-center gap-4 border-b py-4 last:border-b-0">
@@ -161,34 +194,35 @@
     }).join("");
   }
 
-  
-  //  Render one order card
-  
-
+  // Render one order card
   function renderOrder(order, index) {
     const products = order.products || [];
+
     const firstProduct = products[0] || {};
 
     const productName = firstProduct.name || "Order details";
-    const productImage = firstProduct.image || firstProduct.img || "";
 
-    const totalQuantity = products.reduce((sum, item) => {
-      return sum + Math.max(1, Number(item.quantity) || 1);
+    const productImage =
+      firstProduct.image || firstProduct.img || "";
+
+    const totalQuantity = products.reduce((sum, product) => {
+      return sum + Math.max(
+        1,
+        Number(product.quantity) || 1
+      );
     }, 0);
 
-    // Calculate total from products if order.total is missing
-    const calculatedTotal = products.reduce((sum, item) => {
-      const quantity = Math.max(1, Number(item.quantity) || 1);
-      return sum + (Number(item.price) || 0) * quantity;
+    const calculatedTotal = products.reduce((sum, product) => {
+      return sum +
+        (Number(product.price) || 0) *
+        Math.max(1, Number(product.quantity) || 1);
     }, 0);
 
-    const orderTotal = order.total != null
+    const total = order.total != null
       ? Number(order.total)
       : calculatedTotal;
 
-    const productCountText = products.length > 1
-      ? `+ ${products.length - 1} more product(s)`
-      : "View product details";
+    const autoOpen = isJustPlacedView;
 
     return `
       <article
@@ -196,11 +230,10 @@
         data-order-id="${safe(order.orderId)}"
       >
 
-        <!-- Order summary -->
         <button
           type="button"
           class="order-toggle flex w-full items-center gap-3 p-4 text-left hover:bg-gray-50 md:p-5"
-          aria-expanded="false"
+          aria-expanded="${autoOpen}"
           aria-controls="order-details-${index}"
         >
 
@@ -220,40 +253,45 @@
           </div>
 
           <div class="min-w-0 flex-1">
-
-            <!-- Product name instead of Order ID -->
             <h3 class="font-bold text-gray-900">
               ${safe(productName)}
             </h3>
 
             <p class="mt-1 text-sm text-gray-500">
-              ${safe(productCountText)}
+              ${
+                products.length > 1
+                  ? `+ ${products.length - 1} more product(s)`
+                  : "View product details"
+              }
             </p>
 
             <p class="mt-1 text-xs text-gray-500">
               ${totalQuantity} item(s)
             </p>
-
           </div>
 
           <div class="shrink-0 text-right">
             <p class="text-xs text-gray-500">Total</p>
 
             <p class="font-bold text-green-700">
-              ₹${money(orderTotal)}
+              ₹${money(total)}
             </p>
 
             <span class="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-blue-600">
-              Details <span class="chevron">⌄</span>
+              Details
+              <span class="chevron">
+                ${autoOpen ? "⌃" : "⌄"}
+              </span>
             </span>
           </div>
 
         </button>
 
-        <!-- Order details dropdown -->
         <section
           id="order-details-${index}"
-          class="order-details hidden border-t border-gray-200"
+          class="order-details ${
+            autoOpen ? "" : "hidden"
+          } border-t border-gray-200"
         >
 
           <div class="grid gap-3 bg-gray-50 p-4 text-sm sm:grid-cols-2">
@@ -266,28 +304,28 @@
             </div>
 
             <div>
-              <p class="text-gray-500">Order date</p>
+              <p class="text-gray-500">Order Date</p>
               <p class="mt-1 font-medium">
                 ${safe(order.orderDate || "Not available")}
               </p>
             </div>
 
             <div>
-              <p class="text-gray-500">Payment method</p>
+              <p class="text-gray-500">Payment Method</p>
               <p class="mt-1 font-medium">
                 ${safe(order.paymentMethod || "Not provided")}
               </p>
             </div>
 
             <div>
-              <p class="text-gray-500">Order status</p>
+              <p class="text-gray-500">Order Status</p>
               <p class="mt-1 font-semibold text-green-700">
-                Order placed
+                ${safe(order.status || "Order placed")}
               </p>
             </div>
 
             <div class="sm:col-span-2">
-              <p class="text-gray-500">Delivery address</p>
+              <p class="text-gray-500">Delivery Address</p>
               <p class="mt-1 whitespace-pre-line font-medium">
                 ${safe(order.address || "Not provided")}
               </p>
@@ -298,7 +336,7 @@
           <div class="p-4 md:p-5">
 
             <h4 class="font-bold text-gray-900">
-              Products ordered (${products.length})
+              Products Ordered (${products.length})
             </h4>
 
             <div class="mt-2">
@@ -308,27 +346,30 @@
             <div class="mt-4 space-y-2 border-t pt-4 text-sm">
 
               <div class="flex justify-between gap-3">
-                <span class="text-gray-500">Total items</span>
+                <span class="text-gray-500">Total Items</span>
                 <span>${totalQuantity}</span>
               </div>
 
               <div class="flex justify-between gap-3 text-base">
-                <span class="font-bold">Order total</span>
+                <span class="font-bold">Order Total</span>
+
                 <span class="font-bold text-green-700">
-                  ₹${money(orderTotal)}
+                  ₹${money(total)}
                 </span>
               </div>
 
             </div>
 
             <div class="no-print mt-5 flex flex-wrap justify-end gap-3">
+
               <button
                 type="button"
                 class="invoice-button rounded-lg border border-green-600 px-4 py-2 font-semibold text-green-700 hover:bg-green-50"
                 data-order-id="${safe(order.orderId)}"
               >
-                🖨 Download Invoice
+                🖨 Print Invoice
               </button>
+
             </div>
 
           </div>
@@ -338,25 +379,124 @@
     `;
   }
 
+  // Display order history
+  function displayOrders(query = "") {
+    const filteredOrders = orders.filter((order) => {
+      const productNames = (order.products || [])
+        .map((product) => product.name || "")
+        .join(" ");
 
-  //  Order History button
-  
+      const searchText =
+        `${order.orderId} ${productNames}`.toLowerCase();
 
+      return searchText.includes(query.trim().toLowerCase());
+    });
+
+    if (orderCount) {
+      orderCount.textContent =
+        `${filteredOrders.length} order(s)`;
+    }
+
+    // Empty state
+    if (!filteredOrders.length) {
+      container.innerHTML = `
+        <div class="rounded-xl border bg-white p-8 text-center">
+
+          <div class="mb-3 text-4xl">🛍️</div>
+
+          <h3 class="text-xl font-bold">
+            ${
+              isJustPlacedView
+                ? "Order not found"
+                : orders.length
+                  ? "No orders found"
+                  : "No orders yet"
+            }
+          </h3>
+
+          <p class="mt-2 text-sm text-gray-500">
+            ${
+              isJustPlacedView
+                ? "This order could not be found."
+                : orders.length
+                  ? "Try searching with another product name or order ID."
+                  : "Your orders will appear here after you place an order."
+            }
+          </p>
+
+          <a
+            href="${
+              isJustPlacedView
+                ? "my-orders.html"
+                : "index.html"
+            }"
+            class="mt-5 inline-block rounded-lg bg-green-600 px-5 py-3 font-semibold text-white"
+          >
+            ${
+              isJustPlacedView
+                ? "View My Orders"
+                : "Continue Shopping"
+            }
+          </a>
+
+        </div>
+      `;
+
+      updateHistoryButton(0);
+      return;
+    }
+
+    // Checkout shows one order; normal page shows history
+    const visibleOrders =
+      isJustPlacedView || showAllOrders
+        ? filteredOrders
+        : filteredOrders.slice(0, 4);
+
+    container.innerHTML = visibleOrders
+      .map((order, index) => renderOrder(order, index))
+      .join("");
+
+    // Add More Order History button below the current order
+    if (isJustPlacedView) {
+      container.innerHTML += `
+        <div class="mt-6 mb-6 text-center">
+
+          <button
+            id="moreOrderHistoryButton"
+            type="button"
+            class="rounded-xl bg-green-600 px-8 py-3 font-semibold text-white shadow-md transition hover:bg-green-700"
+          >
+            More Order History →
+          </button>
+
+        </div>
+      `;
+    }
+
+    updateHistoryButton(filteredOrders.length);
+  }
+
+  // Show / hide normal order history button
   function updateHistoryButton(totalOrders) {
-    let historyButton = document.getElementById("orderHistoryButton");
+    let historyButton =
+      document.getElementById("orderHistoryButton");
 
     if (!historyButton) {
       historyButton = document.createElement("button");
+
       historyButton.id = "orderHistoryButton";
       historyButton.type = "button";
 
       historyButton.className =
         "mt-2 w-full rounded-xl border border-green-600 bg-white px-5 py-3 font-semibold text-green-700 hover:bg-green-50";
 
-      container.insertAdjacentElement("afterend", historyButton);
+      container.insertAdjacentElement(
+        "afterend",
+        historyButton
+      );
     }
 
-    if (totalOrders <= 4) {
+    if (isJustPlacedView || totalOrders <= 4) {
       historyButton.classList.add("hidden");
       return;
     }
@@ -368,122 +508,8 @@
       : `Order History (${totalOrders - 4} more orders) ▼`;
   }
 
-  
-  // Display orders
-  
-
-  function displayOrders(query = "") {
-    const filteredOrders = orders.filter((order) => {
-      const productNames = (order.products || [])
-        .map((item) => item.name || "")
-        .join(" ");
-
-      const searchText =
-        `${order.orderId} ${productNames}`.toLowerCase();
-
-      return searchText.includes(query.trim().toLowerCase());
-    });
-
-    if (orderCount) {
-      orderCount.textContent = `${filteredOrders.length} order(s)`;
-    }
-
-    if (!filteredOrders.length) {
-      container.innerHTML = `
-        <div class="rounded-xl border bg-white p-8 text-center">
-          <div class="mb-3 text-4xl">🛍️</div>
-
-          <h3 class="text-xl font-bold">
-            ${orders.length ? "No orders found" : "No orders yet"}
-          </h3>
-
-          <p class="mt-2 text-sm text-gray-500">
-            ${
-              orders.length
-                ? "Try searching another product name or order ID."
-                : "Your placed orders will appear here."
-            }
-          </p>
-
-          ${
-            !orders.length
-              ? `
-                <a
-                  href="index.html"
-                  class="mt-5 inline-block rounded-lg bg-green-600 px-5 py-3 font-semibold text-white"
-                >
-                  Start shopping
-                </a>
-              `
-              : ""
-          }
-        </div>
-      `;
-
-      updateHistoryButton(0);
-      return;
-    }
-
-    // Show first 4 orders, or all if history is expanded
-    const visibleOrders = showAllOrders
-      ? filteredOrders
-      : filteredOrders.slice(0, 4);
-
-    container.innerHTML = visibleOrders
-      .map((order, index) => renderOrder(order, index))
-      .join("");
-
-    updateHistoryButton(filteredOrders.length);
-  }
-
- 
-  //  Order dropdown + invoice
-  
-
-  container.addEventListener("click", (event) => {
-    const toggle = event.target.closest(".order-toggle");
-
-    if (toggle) {
-      const details = document.getElementById(
-        toggle.getAttribute("aria-controls")
-      );
-
-      if (!details) return;
-
-      const isOpening = details.classList.contains("hidden");
-
-      details.classList.toggle("hidden", !isOpening);
-      toggle.setAttribute("aria-expanded", String(isOpening));
-
-      const chevron = toggle.querySelector(".chevron");
-
-      if (chevron) {
-        chevron.textContent = isOpening ? "⌃" : "⌄";
-      }
-
-      return;
-    }
-
-    const invoiceButton = event.target.closest(".invoice-button");
-
-    if (invoiceButton) {
-      const orderId = invoiceButton.dataset.orderId;
-
-      const order = orders.find(
-        (item) => String(item.orderId) === String(orderId)
-      );
-
-      if (order) {
-        printInvoice(order, invoiceButton);
-      }
-    }
-  });
-
-  
-  //  Print selected order invoice
- 
-
-  function printInvoice(order, button) {
+  // Print selected order invoice
+  function printInvoice(button) {
     const card = button.closest(".order-card");
 
     if (!card) return;
@@ -494,13 +520,11 @@
       });
 
     const details = card.querySelector(".order-details");
+
     const wasHidden = details?.classList.contains("hidden");
 
     card.classList.add("print-selected");
-
-    if (details) {
-      details.classList.remove("hidden");
-    }
+    details?.classList.remove("hidden");
 
     const cleanup = () => {
       card.classList.remove("print-selected");
@@ -516,14 +540,56 @@
 
     window.print();
 
-    // Fallback for browsers that delay afterprint
     setTimeout(cleanup, 1500);
   }
 
-  
-  //  History button click
-  
+  // Handle all order buttons
+  container.addEventListener("click", (event) => {
 
+    // More Order History: open normal My Orders page
+    if (event.target.closest("#moreOrderHistoryButton")) {
+      window.location.href = "my-orders.html";
+      return;
+    }
+
+    // Expand / collapse order details
+    const toggle = event.target.closest(".order-toggle");
+
+    if (toggle) {
+      const details = document.getElementById(
+        toggle.getAttribute("aria-controls")
+      );
+
+      if (!details) return;
+
+      const opening = details.classList.contains("hidden");
+
+      details.classList.toggle("hidden", !opening);
+
+      toggle.setAttribute(
+        "aria-expanded",
+        String(opening)
+      );
+
+      const chevron = toggle.querySelector(".chevron");
+
+      if (chevron) {
+        chevron.textContent = opening ? "⌃" : "⌄";
+      }
+
+      return;
+    }
+
+    // Print invoice
+    const invoiceButton =
+      event.target.closest(".invoice-button");
+
+    if (invoiceButton) {
+      printInvoice(invoiceButton);
+    }
+  });
+
+  // Normal order history: show more / show less
   document.addEventListener("click", (event) => {
     if (event.target.id !== "orderHistoryButton") return;
 
@@ -532,18 +598,16 @@
     displayOrders(searchInput ? searchInput.value : "");
   });
 
-  
-  //  Search orders
- 
-
+  // Search orders
   if (searchInput) {
     searchInput.addEventListener("input", () => {
-      // Searching should still respect the 4-order limit
       showAllOrders = false;
+
       displayOrders(searchInput.value);
     });
   }
 
   // Initial display
   displayOrders();
+
 })();
