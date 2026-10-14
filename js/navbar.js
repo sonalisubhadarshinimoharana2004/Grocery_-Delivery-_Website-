@@ -81,14 +81,65 @@
       accountBtn?.setAttribute("aria-expanded", "false");
     }
   });
-  header.querySelector("#logoutBtn")?.addEventListener("click", () => {
-    // Sign out also clears the current shopping session's cart so another
-    // signed-out session cannot see the previous user's products.
-    localStorage.removeItem("loggedInUser");
-    localStorage.setItem("cart", "[]");
-    localStorage.removeItem("grocery_cart");
-    location.href = "./index.html";
-  });
+
+header.querySelector("#logoutBtn")?.addEventListener("click", () => {
+    if (document.getElementById("logoutConfirmModal")) return;
+
+    const modal = document.createElement("div");
+
+    modal.id = "logoutConfirmModal";
+    modal.className =
+        "fixed inset-0 z-[200] flex items-center justify-center bg-black/50 p-4";
+
+    modal.innerHTML = `
+        <div role="dialog" aria-modal="true"
+             class="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl">
+
+            <h2 class="text-xl font-bold text-gray-900">
+                Are you sure to logout?
+            </h2>
+
+            <p class="mt-2 text-sm text-gray-600">
+                Do you want to log out of your account?
+            </p>
+
+            <div class="mt-6 flex justify-end gap-3">
+                <button id="cancelLogoutBtn" type="button"
+                    class="rounded-lg border border-gray-300 px-5 py-2.5 font-semibold">
+                    Cancel
+                </button>
+
+                <button id="confirmLogoutBtn" type="button"
+                    class="rounded-lg bg-red-600 px-5 py-2.5 font-semibold text-white">
+                    Sure
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    const closeModal = () => modal.remove();
+
+    modal.querySelector("#cancelLogoutBtn")
+        .addEventListener("click", closeModal);
+
+    modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeModal();
+    });
+
+    modal.querySelector("#confirmLogoutBtn")
+        .addEventListener("click", () => {
+            localStorage.removeItem("loggedInUser");
+            localStorage.setItem("cart", "[]");
+            localStorage.removeItem("grocery_cart");
+
+            location.href = "./index.html";
+        });
+
+    modal.querySelector("#cancelLogoutBtn").focus();
+});
+
   const input = header.querySelector("#searchInput");
   if (input) {
     const params = new URLSearchParams(location.search);

@@ -54,8 +54,37 @@
 
   // Show order success message after checkout
   if (isJustPlacedView) {
-    document.getElementById("successMessage")
-      ?.classList.remove("hidden");
+    
+const successMessage = document.getElementById("successMessage");
+
+successMessage?.classList.remove("hidden");
+
+if (successMessage) {
+    const redirectNotice = document.createElement("p");
+
+    redirectNotice.className =
+        "mt-2 text-sm font-medium text-green-700";
+
+    successMessage.appendChild(redirectNotice);
+
+    let secondsLeft = 6;
+
+    redirectNotice.textContent =
+        `You will be redirected to the home page in ${secondsLeft} seconds...`;
+
+    const redirectTimer = setInterval(() => {
+        secondsLeft--;
+
+        redirectNotice.textContent =
+            `You will be redirected to the home page in ${secondsLeft} second${secondsLeft === 1 ? "" : "s"}...`;
+
+        if (secondsLeft <= 0) {
+            clearInterval(redirectTimer);
+            window.location.href = "index.html";
+        }
+    }, 1000);
+}
+
   }
 
   // Get saved orders
